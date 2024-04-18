@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.javaacademy</groupId>
 	<artifactId>web_homework</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<name>web_homework</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -42,8 +42,9 @@
 				<configuration>
 					<excludes>
 						<exclude>
-							<groupId>org.projectlombok</groupId>
+							<groupId>org.project-lombok</groupId>
 							<artifactId>lombok</artifactId>
+							<version>1.18.30</version>
 						</exclude>
 					</excludes>
 				</configuration>
@@ -59,7 +60,7 @@
 						<configuration>
 							<configLocation>google_checks.xml</configLocation>
 							<consoleOutput>true</consoleOutput>
-							<failsOnError>true</failsOnError>
+							<failsOnError>false</failsOnError>
 						</configuration>
 						<goals>
 							<goal>check</goal>

@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class AnnouncementDto {
   String brand;
   String model;
-  Long price;
+  String price;
   String color;
   LocalDate date;
 }

@@ -9,7 +9,8 @@ public enum Color {
   RED("Red"),
   GREEN("Green"),
   BLUE("Blue"),
-  BLACK("Black");
+  BLACK("Black"),
+  OTHER("Color");
 
   private final String color;
 }

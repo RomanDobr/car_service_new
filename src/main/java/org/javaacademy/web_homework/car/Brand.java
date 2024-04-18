@@ -8,7 +8,8 @@ import lombok.Getter;
 public enum Brand {
   CHERY("Chery"),
   CHEVROLET("Chevrolet"),
-  HYUNDAI("Hyundai");
+  HYUNDAI("Hyundai"),
+  OTHER("Brand");
 
   private String name;
 }

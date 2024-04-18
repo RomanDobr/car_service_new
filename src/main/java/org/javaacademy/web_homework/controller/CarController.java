@@ -6,9 +6,18 @@ import org.javaacademy.web_homework.dto.AnnouncementDto;
 import org.javaacademy.web_homework.entity.Announcement;
 import org.javaacademy.web_homework.service.AnnouncementService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
+import java.util.LinkedList;
+
 
 @Slf4j
 @RestController
@@ -29,39 +38,24 @@ public class CarController {
                                                      @RequestParam(required = false) String color,
                                                      @RequestParam(required = false) String model,
                                                      @RequestParam(required = false) String price) {
+
     if (date != null) {
       return announcementService.findAnnouncementsByData(LocalDate.parse(date));
-    } else if (brand != null) {
-      return announcementService.findAnnouncementByBrand(brand);
-    } else if (model != null) {
-      return announcementService.findAnnouncementByModel(model);
-    } else if (color != null) {
-      return announcementService.findAnnouncementByColor(color);
-    } else if (price != null) {
-      return announcementService.findAnnouncementByPrice(price);
-    } else if ((brand != null) && (color != null)) {
-      return announcementService.findAnnouncementByBrandAndColor(brand, color);
-    } else if ((brand != null) && (model != null)) {
-      return announcementService.findAnnouncementByBrandAndModel(brand, model);
-    } else if ((brand != null) && (price != null)) {
-      return announcementService.findAnnouncementByBrandAndPrice(brand, price);
-    } else if ((color != null) && (model != null)) {
-      return announcementService.findAnnouncementByColorAndModel(color, model);
-    } else if ((color != null) && (price != null)) {
-      return announcementService.findAnnouncementByColorAndPrice(color, price);
-    } else if ((model != null) && (price != null)) {
-      return announcementService.findAnnouncementByModelAndPrice(model, price);
-    } else if ((brand != null) && (color != null) && (price != null)) {
-      return announcementService.findAnnouncementByBrandAndColorAndPrice(brand, color, price);
-    } else if ((brand != null) && (color != null) && (model != null)) {
-      return announcementService.findAnnouncementByBrandAndColorAndModel(brand, color, model);
-    } else if ((color != null) && (price != null) && (model != null)) {
-      return announcementService.findAnnouncementByColorAndPriceAndModel(color, price, model);
-    } else if ((brand != null) && (model != null) && (price != null)) {
-      return announcementService.findAnnouncementByBrandAndModelAndPrice(brand, model, price);
-    } else if ((brand != null) && (color != null) && (model != null) && (price != null)) {
-      return announcementService.findAnnouncementByBrandAndColorAndModelAndPrice(brand, color, model, price);
     }
+
+    if (date == null && brand == null && color == null && model == null && price == null) {
+      return announcementService.findAnnouncementAll();
+    }
+
+    List<String> params = new LinkedList<>();
+    params.add(brand);
+    params.add(color);
+    params.add(model);
+    params.add(price);
+    if (params.size() > 0) {
+      return announcementService.findAnnouncementsByParams(params);
+    }
+
     return announcementService.findAnnouncementAll();
   }
 
